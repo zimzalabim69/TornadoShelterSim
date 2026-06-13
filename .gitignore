@@ -1,0 +1,22 @@
+# Godot .gitignore
+.godot/
+*.tmp
+*.import
+*.translation
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Build
+*.exe
+*.apk
+*.pck
+*.zip
+
+# Logs
+*.log

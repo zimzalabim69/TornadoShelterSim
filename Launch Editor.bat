@@ -1,0 +1,3 @@
+@echo off
+echo Launching Godot 4.6.3 with TornadoShelterSim...
+start "" "C:\Godot\Godot_v4.6.3-stable_win64.exe" --path "C:\Users\sikke\Projects\TornadoShelterSim" --editor

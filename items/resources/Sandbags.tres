@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="ItemResource" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/items/ItemResource.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+item_name = "Sandbag"
+category = "TOOLS"
+max_stack = 10
+volume = 2.0
+weight = 8.0
+description = "Heavy sandbags. Great for reinforcing doors and low walls."

@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://shelter"]
+
+[ext_resource type="PackedScene" uid="uid://building_base" path="res://assets/scenes/buildings/BuildingBase.tscn" id="1_base"]
+
+[node name="Shelter" instance=ExtResource("1_base")]
+
+[node name="Visual" parent="." index="0"]
+# Drag your basement_shelter.glb here
+# This one is important — make sure floor collision is solid
+
+[node name="CollisionBody" parent="." index="1"]
+# Strong floor collision required
+# Walls + ceiling for underground shelter feel
+# Add door/entrance collision so player can't walk through

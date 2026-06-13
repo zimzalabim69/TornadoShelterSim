@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="ItemResource" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/items/ItemResource.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+item_name = "Canned Food"
+category = "FOOD"
+max_stack = 8
+volume = 1.0
+weight = 0.8
+description = "Non-perishable food. Good for several days."

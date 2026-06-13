@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="ItemResource" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/items/ItemResource.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+item_name = "Jerry Can (Fuel)"
+category = "FUEL"
+max_stack = 3
+volume = 3.0
+weight = 5.0
+description = "Gasoline. Needed to run the generator during the storm."

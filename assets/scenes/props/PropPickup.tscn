@@ -1,0 +1,35 @@
+[gd_scene load_steps=3 format=3 uid="uid://prop_pickup"]
+
+[ext_resource type="Script" path="res://scripts/items/Pickup3D.gd" id="1_prop"]
+
+[sub_resource type="BoxShape3D" id="PropShape"]
+size = Vector3(0.4, 0.4, 0.4)
+
+[node name="PropPickup" type="RigidBody3D" groups=["Pickup"]]
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("1_prop")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("PropShape")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+# Replace this with your supply .glb mesh (water jug, plywood stack, etc.)
+# Use unshaded low-poly material
+
+[node name="Label3D" type="Label3D" parent="."]
+billboard = 1
+text = "Supply"
+font_size = 12
+outline_size = 2
+outline_color = Color(0, 0, 0, 0.8)
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("PropShape")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_body_entered"]
+[connection signal="body_exited" from="Area3D" to="." method="_on_body_exited"]

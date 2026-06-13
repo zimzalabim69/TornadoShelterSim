@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://tile_transition"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_Transition"]
+size = Vector2(2, 2)
+subdivide_width = 1
+subdivide_depth = 1
+
+[sub_resource type="StandardMaterial3D" id="Mat_Transition"]
+resource_name = "GrassDirtMix"
+shading_mode = 0
+albedo_color = Color(0.48, 0.5, 0.32, 1)
+
+[sub_resource type="BoxShape3D" id="CollisionShape"]
+size = Vector3(2, 0.1, 2)
+
+[node name="Tile_Grass_Dirt_Transition" type="Node3D"]
+
+[node name="Mesh" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_Transition")
+surface_material_override/0 = SubResource("Mat_Transition")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("CollisionShape")
