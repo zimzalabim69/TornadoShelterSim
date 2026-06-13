@@ -11,6 +11,39 @@ If that doesn't work, open the file `README_FIRST.txt` (it has big clear instruc
 
 ---
 
+## Getting Started
+
+### Prerequisites
+- **Godot Engine 4.x**: Download from [godotengine.org](https://godotengine.org/download)
+- **Windows OS**: This project is currently Windows-focused
+- **Basic Godot knowledge**: Familiarity with the Godot editor interface
+
+### Project Setup
+1. Clone or download this repository
+2. Open Godot Engine
+3. Click "Import" and select the `project.godot` file in this directory
+4. Godot will import the project and open the editor
+
+### Running the Project
+- **In Editor**: Press `F5` or click the "Play" button in the top-right
+- **Standalone Build**: Use `Launch TornadoShelterSim.bat` (recommended)
+- **HTML5 Export**: Project is configured for web export (Export menu → HTML5)
+
+### Project Structure
+- `scenes/` - Game scenes (player, items, environment)
+- `scripts/` - GDScript logic files
+- `assets/` - Textures, audio, and other resources
+- `addons/` - Third-party plugins and extensions
+- `demo/` - Demo content and test scenes
+
+### Development Workflow
+- Edit scenes in the Godot editor
+- Write scripts in GDScript
+- Test frequently using `F5` to run
+- Check `README_FIRST.txt` for detailed troubleshooting
+
+---
+
 **Current Step**: Step 2 (Item Pickup + Basic Inventory) — Fully playable
 
 ## Quick Controls (when running)
