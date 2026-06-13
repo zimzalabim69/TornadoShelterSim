@@ -19,28 +19,58 @@ If that doesn't work, open the file `README_FIRST.txt` (it has big clear instruc
 - **Basic Godot knowledge**: Familiarity with the Godot editor interface
 
 ### Project Setup
+
+#### Quick Start (Recommended)
+1. **Double-click `Launch TornadoShelterSim.bat`** - This will attempt to automatically open Godot with this project
+2. If the batch file doesn't work, follow the manual setup below
+
+#### Manual Setup
 1. Clone or download this repository
 2. Open Godot Engine
 3. Click "Import" and select the `project.godot` file in this directory
 4. Godot will import the project and open the editor
+5. If import errors occur, check `README_FIRST.txt` for troubleshooting
 
 ### Running the Project
-- **In Editor**: Press `F5` or click the "Play" button in the top-right
-- **Standalone Build**: Use `Launch TornadoShelterSim.bat` (recommended)
-- **HTML5 Export**: Project is configured for web export (Export menu → HTML5)
+
+#### In Editor
+- Press `F5` or click the "Play" button in the top-right corner
+- Use `F6` to run the current scene for quick testing
+
+#### Standalone Build
+- Use `Launch TornadoShelterSim.bat` (recommended)
+- Or manually run the exported executable from the exports folder
+
+#### HTML5 Export
+- Project is configured for web export
+- Go to Export menu → Export Project → HTML5
+- Requires Godot HTML5 export templates to be installed
 
 ### Project Structure
-- `scenes/` - Game scenes (player, items, environment)
-- `scripts/` - GDScript logic files
-- `assets/` - Textures, audio, and other resources
-- `addons/` - Third-party plugins and extensions
-- `demo/` - Demo content and test scenes
+```
+TornadoShelterSim/
+├── scenes/           # Game scenes (player, items, environment)
+├── scripts/          # GDScript logic files
+├── assets/           # Textures, audio, and other resources
+├── addons/           # Third-party plugins and extensions
+├── demo/             # Demo content and test scenes
+├── project.godot     # Godot project configuration
+└── README_FIRST.txt  # Detailed troubleshooting and setup guide
+```
 
 ### Development Workflow
-- Edit scenes in the Godot editor
-- Write scripts in GDScript
-- Test frequently using `F5` to run
-- Check `README_FIRST.txt` for detailed troubleshooting
+1. **Scene Editing**: Edit scenes in the Godot editor
+2. **Scripting**: Write scripts in GDScript using the built-in script editor
+3. **Testing**: Test frequently using `F5` to run the full project or `F6` for current scene
+4. **Iteration**: Use the hot-reload feature (Ctrl+Shift+R) for quick script updates
+5. **Troubleshooting**: Check `README_FIRST.txt` for detailed setup and issue resolution
+
+### Next Steps
+- [ ] Set up Godot and import the project successfully
+- [ ] Run the project using F5 to verify basic functionality
+- [ ] Explore the demo scenes to understand current features
+- [ ] Review the project structure and existing scripts
+- [ ] Check `README_FIRST.txt` for any platform-specific setup instructions
 
 ---
 
