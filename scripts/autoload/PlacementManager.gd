@@ -10,10 +10,10 @@ var current_item: ItemResource
 # Chunky grid for PS1/PS2 feel (matches 2x2 GridMap tiles)
 const PLACEMENT_GRID := 1.0
 
-func start_placing(item: ItemResource):
+func start_placing(item: ItemResource) -> bool:
 	if not item or item.category not in ["BOARDS", "FORTIFICATION"]:
 		print("Cannot place: ", item.item_name if item else "null", " (needs BOARDS or FORTIFICATION category)")
-		return
+		return false
 
 	is_placing = true
 	current_item = item
@@ -22,6 +22,7 @@ func start_placing(item: ItemResource):
 		_create_preview()
 
 	preview.visible = false
+	return true
 
 func _create_preview():
 	preview = MeshInstance3D.new()

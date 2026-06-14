@@ -39,9 +39,7 @@ func _drop_data(_at_position, data):
 func _gui_input(event):
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
 		var pm := get_node_or_null("/root/PlacementManager")
-		var inv := get_node_or_null("/root/InventoryManager")
-		if item_resource and pm and inv:
+		if item_resource and pm:
+			# Item is consumed only when placement is confirmed (PlacementManager.try_place),
+			# so non-placeable items and cancelled placements are no longer lost.
 			pm.start_placing(item_resource)
-			# Remove from inventory for now (simple)
-			inv.remove_item(item_resource, 1)
-			get_parent().get_parent().get_parent()._refresh_inventory()  # hacky refresh via UI chain

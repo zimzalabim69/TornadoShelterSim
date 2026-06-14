@@ -18,6 +18,7 @@ var player_max_health: int = 100
 var player_health: int = 100
 
 func _ready():
+	add_to_group("Player")  # so Pickup3D proximity labels detect the player
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	mouse_captured = true
 	if camera:
