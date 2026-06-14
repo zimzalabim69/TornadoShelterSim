@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://yard"]
+
+[sub_resource type="BoxShape3D" id="YardFloor"]
+size = Vector3(60, 1, 60)
+
+[node name="Yard" type="Node3D"]
+
+[node name="Visual" type="MeshInstance3D" parent="."]
+# Drag your yard.glb or large ground plane here
+# For low-poly PS1 look: use unshaded material + vertex colors if available
+
+[node name="CollisionBody" type="StaticBody3D" parent="."]
+collision_layer = 1
+collision_mask = 2
+
+[node name="Floor" type="CollisionShape3D" parent="CollisionBody"]
+shape = SubResource("YardFloor")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+
+# Add more collision for any hills, fences, or large props in the yard model

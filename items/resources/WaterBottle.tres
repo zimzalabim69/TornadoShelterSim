@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="ItemResource" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/items/ItemResource.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+item_name = "Water Bottle"
+category = "WATER"
+max_stack = 6
+volume = 1.5
+weight = 1.2
+description = "Clean drinking water. Essential for survival."

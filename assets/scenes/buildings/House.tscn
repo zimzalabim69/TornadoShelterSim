@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=3 uid="uid://house"]
+
+[ext_resource type="PackedScene" uid="uid://building_base" path="res://assets/scenes/buildings/BuildingBase.tscn" id="1_base"]
+
+[node name="House" instance=ExtResource("1_base")]
+
+[node name="Visual" parent="." index="0"]
+# Drag your house.glb MeshInstance here (or instance the imported scene)
+# Recommended: Keep Unshaded material for PS1 low-poly look
+
+[node name="CollisionBody" parent="." index="1"]
+# Add simple box collisions here:
+# - Floor (large flat box)
+# - Main walls (thin vertical boxes)
+# - Roof (approximated)
+# - Door/window frames if you want interaction blocking
+
+# Example collision nodes (duplicate and resize as needed):
+# [CollisionShape3D] named "Floor"
+# [CollisionShape3D] named "Wall_North"
+# etc.

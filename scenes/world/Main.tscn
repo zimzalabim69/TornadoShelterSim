@@ -1,0 +1,135 @@
+[gd_scene format=3 uid="uid://main3d"]
+
+[ext_resource type="Script" uid="uid://1yn2mr37o6w" path="res://scripts/world/World.gd" id="1_world"]
+[ext_resource type="Texture2D" uid="uid://1j8k1xv2hb14" path="res://assets/generated/midwest_grass_tile_frame_0.png" id="2_nciap"]
+[ext_resource type="PackedScene" path="res://scenes/ui/InventoryUI.tscn" id="3_inventory_ui"]
+[ext_resource type="PackedScene" path="res://scenes/ui/ShelterStorageUI.tscn" id="5_shelter_storage"]
+[ext_resource type="PackedScene" path="res://scenes/ui/WaterLevelHUD.tscn" id="6_water_hud"]
+[ext_resource type="PackedScene" uid="uid://player3d" path="res://scenes/player/Player3D.tscn" id="7_player"]
+
+[sub_resource type="ProceduralSkyMaterial" id="SkyMaterial"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky"]
+sky_material = SubResource("SkyMaterial")
+
+[sub_resource type="Environment" id="Environment3D"]
+background_mode = 2
+sky = SubResource("Sky")
+tonemap_mode = 2
+
+[sub_resource type="BoxShape3D" id="GroundCollision"]
+size = Vector3(100, 1, 100)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_10578"]
+albedo_texture = ExtResource("2_nciap")
+uv1_scale = Vector3(25, 25, 1)
+
+[sub_resource type="PlaneMesh" id="GroundMesh"]
+size = Vector2(100, 100)
+
+[sub_resource type="Gradient" id="Gradient_0nnu2"]
+offsets = PackedFloat32Array(0.2, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_nciap"]
+noise_type = 2
+frequency = 0.03
+cellular_jitter = 3.0
+cellular_return_type = 0
+domain_warp_enabled = true
+domain_warp_type = 1
+domain_warp_amplitude = 50.0
+domain_warp_fractal_type = 2
+domain_warp_fractal_lacunarity = 1.5
+domain_warp_fractal_gain = 1.0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_10578"]
+noise = SubResource("FastNoiseLite_nciap")
+color_ramp = SubResource("Gradient_0nnu2")
+seamless = true
+
+[sub_resource type="Terrain3DMaterial" id="Terrain3DMaterial_26o6m"]
+_shader_parameters = {
+&"bias_distance": null,
+&"blend_sharpness": null,
+&"depth_blur": null,
+&"enable_macro_variation": null,
+&"enable_projection": null,
+&"flat_terrain_normals": null,
+&"macro_variation1": null,
+&"macro_variation2": null,
+&"macro_variation_slope": null,
+&"mipmap_bias": null,
+&"noise1_angle": null,
+&"noise1_offset": null,
+&"noise1_scale": null,
+&"noise2_scale": null,
+&"noise_texture": SubResource("NoiseTexture2D_10578"),
+&"projection_threshold": null
+}
+show_checkered = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b3pok"]
+transparency = 4
+cull_mode = 2
+vertex_color_use_as_albedo = true
+backlight_enabled = true
+backlight = Color(0.5, 0.5, 0.5, 1)
+distance_fade_mode = 1
+distance_fade_min_distance = 128.0
+distance_fade_max_distance = 96.0
+
+[sub_resource type="Terrain3DMeshAsset" id="Terrain3DMeshAsset_vanwo"]
+generated_type = 1
+height_offset = 0.5
+material_override = SubResource("StandardMaterial3D_b3pok")
+last_lod = 0
+last_shadow_lod = 0
+lod0_range = 128.0
+
+[sub_resource type="Terrain3DAssets" id="Terrain3DAssets_dvywm"]
+mesh_list = Array[Terrain3DMeshAsset]([SubResource("Terrain3DMeshAsset_vanwo")])
+
+[node name="Main3D" type="Node3D" unique_id=133800304]
+script = ExtResource("1_world")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=795752103]
+environment = SubResource("Environment3D")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1625445654]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 10, 0)
+shadow_enabled = true
+
+[node name="Ground" type="StaticBody3D" parent="." unique_id=1852869191]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground" unique_id=31905708]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+shape = SubResource("GroundCollision")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground" unique_id=319847838]
+visible = false
+material_override = SubResource("StandardMaterial3D_10578")
+mesh = SubResource("GroundMesh")
+
+[node name="Yard" type="Node3D" parent="." unique_id=1689228560]
+
+[node name="Player3D" parent="Yard" unique_id=1503448548 instance=ExtResource("7_player")]
+
+[node name="GridMap" type="GridMap" parent="Yard" unique_id=672816222]
+
+[node name="Terrain3D" type="Terrain3D" parent="." unique_id=1486237084]
+material = SubResource("Terrain3DMaterial_26o6m")
+assets = SubResource("Terrain3DAssets_dvywm")
+show_checkered = true
+top_level = true
+metadata/_edit_lock_ = true
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=1607341788]
+
+[node name="InventoryUI" parent="UI" unique_id=1562417869 instance=ExtResource("3_inventory_ui")]
+
+[node name="ShelterStorageUI" parent="UI" unique_id=963167624 instance=ExtResource("5_shelter_storage")]
+
+[node name="WaterLevelHUD" parent="UI" instance=ExtResource("6_water_hud")]

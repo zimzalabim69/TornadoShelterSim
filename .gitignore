@@ -1,0 +1,32 @@
+# Godot .gitignore
+.godot/
+*.tmp
+*.import
+*.translation
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Build
+*.exe
+*.apk
+*.pck
+*.zip
+
+# Logs
+*.log
+
+# Third-party agent/tooling addons (kept locally, not tracked)
+addons/ziva_agent/
+addons/godot_mcp/
+
+# Editor scratch / import logs
+godot_import_log.txt
+godot_import_errors.txt
+godot_path.txt
+FIX_ERRORS.txt

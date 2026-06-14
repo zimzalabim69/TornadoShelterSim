@@ -1,0 +1,40 @@
+[gd_scene load_steps=2 format=3 uid="uid://shelter_storage_ui"]
+
+[ext_resource type="Script" path="res://scripts/ui/ShelterStorageUI.gd" id="1_shelter"]
+
+[node name="ShelterStorageUI" type="CanvasLayer"]
+script = ExtResource("1_shelter")
+
+[node name="Panel" type="Panel" parent="."]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -200.0
+offset_right = 300.0
+offset_bottom = 200.0
+
+[node name="Title" type="Label" parent="Panel"]
+offset_left = 20.0
+offset_top = 10.0
+offset_right = 280.0
+offset_bottom = 40.0
+text = "SHELTER STORAGE (F to toggle)"
+horizontal_alignment = 1
+
+[node name="Grid" type="GridContainer" parent="Panel"]
+offset_left = 20.0
+offset_top = 50.0
+offset_right = 580.0
+offset_bottom = 380.0
+columns = 6
+
+[node name="CloseHint" type="Label" parent="Panel"]
+offset_left = 20.0
+offset_top = 370.0
+offset_right = 580.0
+offset_bottom = 390.0
+text = "Right-click item in inventory to place fortification (preview snaps to grid)"
+horizontal_alignment = 1
