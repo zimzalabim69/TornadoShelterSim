@@ -12,7 +12,7 @@ func _ready() -> void:
 	print("[InventoryManager] Step 2 ready")
 
 func add_item(new_item: ItemResource, qty: int = 1) -> bool:
-	if not new_item:
+	if not new_item or qty <= 0:
 		return false
 	
 	var added_weight: float = new_item.weight * qty
@@ -20,39 +20,56 @@ func add_item(new_item: ItemResource, qty: int = 1) -> bool:
 		print("Too heavy! Cannot carry more.")
 		return false
 	
-	# Try to stack
+	var remaining: int = qty
+	
+	# Fill existing stacks first
 	for slot in inventory:
+		if remaining <= 0:
+			break
 		if slot.resource == new_item and slot.quantity < new_item.max_stack:
 			var space_left: int = new_item.max_stack - int(slot.quantity)
-			var to_add: int = min(qty, space_left)
+			var to_add: int = min(remaining, space_left)
 			slot.quantity += to_add
-			current_weight += new_item.weight * to_add
-			inventory_changed.emit()
-			return true
+			remaining -= to_add
 	
-	# New slot
-	inventory.append({
-		"resource": new_item,
-		"quantity": qty
-	})
+	# Spill whatever is left into new stacks, respecting max_stack.
+	# Guard against max_stack <= 0 (editable in the inspector) so a single
+	# stack absorbs everything instead of looping forever.
+	var stack_cap: int = new_item.max_stack if new_item.max_stack > 0 else remaining
+	while remaining > 0:
+		var to_add: int = min(remaining, stack_cap)
+		inventory.append({
+			"resource": new_item,
+			"quantity": to_add
+		})
+		remaining -= to_add
+	
 	current_weight += added_weight
 	inventory_changed.emit()
 	return true
 
 func remove_item(item_resource: ItemResource, qty: int = 1) -> bool:
-	for i in range(inventory.size()):
+	if not item_resource or qty <= 0:
+		return false
+	
+	var remaining: int = qty
+	var i: int = 0
+	# Span every matching stack, since add_item may have split the item.
+	while i < inventory.size() and remaining > 0:
 		var slot: Dictionary = inventory[i]
 		if slot.resource == item_resource:
-			var remove_amount: int = min(qty, int(slot.quantity))
+			var remove_amount: int = min(remaining, int(slot.quantity))
 			slot.quantity -= remove_amount
+			remaining -= remove_amount
 			current_weight -= item_resource.weight * remove_amount
-			
 			if slot.quantity <= 0:
 				inventory.remove_at(i)
-			
-			inventory_changed.emit()
-			return true
-	return false
+				continue  # next slot shifted into index i
+		i += 1
+	
+	if remaining < qty:
+		inventory_changed.emit()
+	return remaining == 0
 
 func get_total_weight() -> float:
 	return current_weight

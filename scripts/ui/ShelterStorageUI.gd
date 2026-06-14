@@ -6,7 +6,7 @@ extends CanvasLayer
 var slot_scene = preload("res://scenes/ui/InventorySlot.tscn")  # reuse for simplicity
 
 func _ready():
-	hide()
+	panel.visible = false
 	# Populate with empty slots for shelter storage
 	for i in 24:
 		var slot = slot_scene.instantiate()

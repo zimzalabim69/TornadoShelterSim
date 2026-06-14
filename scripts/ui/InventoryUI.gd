@@ -13,7 +13,6 @@ func _ready() -> void:
 	if inv:
 		inv.inventory_changed.connect(_on_inventory_changed)
 	panel.visible = false
-	hide()
 
 	# Connect close button if it exists
 	if close_button:
