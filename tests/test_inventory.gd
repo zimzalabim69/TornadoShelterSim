@@ -14,6 +14,8 @@ func _init():
 	_test_new_item_respects_max_stack()
 	_test_weight_limit_rejects()
 	_test_remove_item()
+	_test_remove_spans_stacks()
+	_test_zero_max_stack_no_hang()
 
 	print("\n=== Results ===")
 	print("Passed: ", _pass_count)
@@ -84,3 +86,27 @@ func _test_remove_item() -> void:
 	_assert(_total_qty(im) == 1, "1 item left after removing 2 of 3 (got %d)" % _total_qty(im))
 	im.remove_item(item, 5)
 	_assert(im.inventory.size() == 0, "Slot cleared when emptied")
+
+func _test_remove_spans_stacks() -> void:
+	print("\n-- Test: remove_item spans multiple stacks --")
+	var im = _make_manager()
+	var item := _make_item(10, 1.0)
+	im.add_item(item, 15)  # -> [10][5]
+	_assert(im.inventory.size() == 2, "Precondition: split into 2 stacks (got %d)" % im.inventory.size())
+
+	var ok: bool = im.remove_item(item, 12)  # crosses the stack boundary
+	_assert(ok, "remove_item returns true when full qty removed across stacks")
+	_assert(_total_qty(im) == 3, "3 items left after removing 12 of 15 (got %d)" % _total_qty(im))
+	_assert(abs(im.current_weight - 3.0) < 0.001, "Weight matches remaining qty (got %.2f)" % im.current_weight)
+
+	var partial: bool = im.remove_item(item, 99)  # more than present
+	_assert(not partial, "remove_item returns false when it cannot remove the full qty")
+	_assert(_total_qty(im) == 0, "All items removed on over-remove")
+
+func _test_zero_max_stack_no_hang() -> void:
+	print("\n-- Test: max_stack <= 0 does not hang and keeps items --")
+	var im = _make_manager()
+	var item := _make_item(0, 0.0)  # pathological inspector value
+	var ok: bool = im.add_item(item, 5)
+	_assert(ok, "add_item succeeds with max_stack 0")
+	_assert(_total_qty(im) == 5, "All 5 items retained with max_stack 0 (got %d)" % _total_qty(im))
