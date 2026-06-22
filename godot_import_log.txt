@@ -1,5 +1,0 @@
-Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
-
-[GameManager] Initialized. Prep time: 18.0 minutes
-[InventoryManager] Step 2 ready
-[World] Main scene ready - Step 1
